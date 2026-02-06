@@ -1,0 +1,206 @@
+import java.util.*;
+
+public class L3_JavaGraphRepresentation {
+
+    /* -------------------------------------------------
+       Utility Print Functions
+    ------------------------------------------------- */
+    static void printMatrix(int[][] adj, int n) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                System.out.print(adj[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    static void printList(List<List<Integer>> adj) {
+        for (int i = 1; i < adj.size(); i++) {
+            System.out.print(i + " -> ");
+            for (int v : adj.get(i)) {
+                System.out.print(v + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    static void printWeightedList(List<List<int[]>> adj) {
+        for (int i = 1; i < adj.size(); i++) {
+            System.out.print(i + " -> ");
+            for (int[] edge : adj.get(i)) {
+                System.out.print("(" + edge[0] + ", " + edge[1] + ") ");
+            }
+            System.out.println();
+        }
+    }
+
+    /* -------------------------------------------------
+       1. Unweighted Adjacency Matrix — Undirected
+    ------------------------------------------------- */
+    static void matrixUndirected() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        int[][] adj = new int[n + 1][n + 1];
+
+        for (int i = 0; i < m; i++) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+            adj[u][v] = 1;
+            adj[v][u] = 1;
+        }
+
+        printMatrix(adj, n);
+    }
+
+    /* -------------------------------------------------
+       2. Unweighted Adjacency Matrix — Directed
+    ------------------------------------------------- */
+    static void matrixDirected() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        int[][] adj = new int[n + 1][n + 1];
+
+        for (int i = 0; i < m; i++) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+            adj[u][v] = 1;
+        }
+
+        printMatrix(adj, n);
+    }
+
+    /* -------------------------------------------------
+       3. Unweighted Adjacency List — Undirected
+    ------------------------------------------------- */
+    static void listUndirected() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i <= n; i++) adj.add(new ArrayList<>());
+
+        for (int i = 0; i < m; i++) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+            adj.get(u).add(v);
+            adj.get(v).add(u);
+        }
+
+        printList(adj);
+    }
+
+    /* -------------------------------------------------
+       4. Unweighted Adjacency List — Directed
+    ------------------------------------------------- */
+    static void listDirected() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i <= n; i++) adj.add(new ArrayList<>());
+
+        for (int i = 0; i < m; i++) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+            adj.get(u).add(v);
+        }
+
+        printList(adj);
+    }
+
+    /* -------------------------------------------------
+       5. Weighted Adjacency Matrix — Undirected
+    ------------------------------------------------- */
+    static void weightedMatrixUndirected() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        int[][] adj = new int[n + 1][n + 1];
+
+        for (int i = 0; i < m; i++) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+            int w = sc.nextInt();
+            adj[u][v] = w;
+            adj[v][u] = w;
+        }
+
+        printMatrix(adj, n);
+    }
+
+    /* -------------------------------------------------
+       6. Weighted Adjacency Matrix — Directed
+    ------------------------------------------------- */
+    static void weightedMatrixDirected() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        int[][] adj = new int[n + 1][n + 1];
+
+        for (int i = 0; i < m; i++) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+            int w = sc.nextInt();
+            adj[u][v] = w;
+        }
+
+        printMatrix(adj, n);
+    }
+
+    /* -------------------------------------------------
+       7. Weighted Adjacency List — Undirected
+    ------------------------------------------------- */
+    static void weightedListUndirected() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        List<List<int[]>> adj = new ArrayList<>();
+        for (int i = 0; i <= n; i++) adj.add(new ArrayList<>());
+
+        for (int i = 0; i < m; i++) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+            int w = sc.nextInt();
+            adj.get(u).add(new int[]{v, w});
+            adj.get(v).add(new int[]{u, w});
+        }
+
+        printWeightedList(adj);
+    }
+
+    /* -------------------------------------------------
+       8. Weighted Adjacency List — Directed
+    ------------------------------------------------- */
+    static void weightedListDirected() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        List<List<int[]>> adj = new ArrayList<>();
+        for (int i = 0; i <= n; i++) adj.add(new ArrayList<>());
+
+        for (int i = 0; i < m; i++) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+            int w = sc.nextInt();
+            adj.get(u).add(new int[]{v, w});
+        }
+
+        printWeightedList(adj);
+    }
+
+ 
+
+    public static void main(String[] args) {
+        System.out.println("Everything Fine");
+    }
+}
