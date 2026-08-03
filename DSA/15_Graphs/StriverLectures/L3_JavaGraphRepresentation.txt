@@ -4,7 +4,20 @@ public class L3_JavaGraphRepresentation {
 
     /* -------------------------------------------------
        Utility Print Functions
+       Algorithm:
+       - These helper functions only display graph representations
+         in a readable format.
+       Notes:
+       - Indexing starts from 1 because the graph examples use 1-based nodes.
+       - These are reused by multiple graph representation methods.
     ------------------------------------------------- */
+
+    /*
+     * Prints a 2D adjacency matrix.
+     * Notes:
+     * - Loops from 1 to n because row/column 0 is unused.
+     * - Works for both weighted and unweighted matrices.
+     */
     static void printMatrix(int[][] adj, int n) {
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
@@ -14,6 +27,12 @@ public class L3_JavaGraphRepresentation {
         }
     }
 
+    /*
+     * Prints an adjacency list for unweighted graphs.
+     * Notes:
+     * - Each vertex is printed along with all adjacent vertices.
+     * - Uses List<List<Integer>> representation.
+     */
     static void printList(List<List<Integer>> adj) {
         for (int i = 1; i < adj.size(); i++) {
             System.out.print(i + " -> ");
@@ -24,6 +43,12 @@ public class L3_JavaGraphRepresentation {
         }
     }
 
+    /*
+     * Prints a weighted adjacency list.
+     * Notes:
+     * - Each edge is stored as int[]{vertex, weight}.
+     * - Output format is: node -> (neighbor, weight)
+     */
     static void printWeightedList(List<List<int[]>> adj) {
         for (int i = 1; i < adj.size(); i++) {
             System.out.print(i + " -> ");
@@ -36,6 +61,12 @@ public class L3_JavaGraphRepresentation {
 
     /* -------------------------------------------------
        1. Unweighted Adjacency Matrix — Undirected
+       Algorithm:
+       - Create an n x n matrix initialized with 0.
+       - For every edge (u, v), mark both adj[u][v] and adj[v][u] as 1.
+       Notes:
+       - Best used when quick edge lookup is needed.
+       - Space complexity is O(n^2).
     ------------------------------------------------- */
     static void matrixUndirected() {
         Scanner sc = new Scanner(System.in);
@@ -56,6 +87,12 @@ public class L3_JavaGraphRepresentation {
 
     /* -------------------------------------------------
        2. Unweighted Adjacency Matrix — Directed
+       Algorithm:
+       - Create an n x n matrix initialized with 0.
+       - For every edge (u, v), mark adj[u][v] as 1 only.
+       Notes:
+       - Direction matters, so reverse edge is not added.
+       - Space complexity is O(n^2).
     ------------------------------------------------- */
     static void matrixDirected() {
         Scanner sc = new Scanner(System.in);
@@ -75,6 +112,12 @@ public class L3_JavaGraphRepresentation {
 
     /* -------------------------------------------------
        3. Unweighted Adjacency List — Undirected
+       Algorithm:
+       - Create a list of lists.
+       - For each edge (u, v), add v to u's list and u to v's list.
+       Notes:
+       - More space-efficient than matrix for sparse graphs.
+       - Good for traversal algorithms like DFS and BFS.
     ------------------------------------------------- */
     static void listUndirected() {
         Scanner sc = new Scanner(System.in);
@@ -96,6 +139,12 @@ public class L3_JavaGraphRepresentation {
 
     /* -------------------------------------------------
        4. Unweighted Adjacency List — Directed
+       Algorithm:
+       - Create a list of lists.
+       - For each edge (u, v), add v only to u's adjacency list.
+       Notes:
+       - Preserves edge direction.
+       - Efficient for sparse directed graphs.
     ------------------------------------------------- */
     static void listDirected() {
         Scanner sc = new Scanner(System.in);
@@ -116,6 +165,12 @@ public class L3_JavaGraphRepresentation {
 
     /* -------------------------------------------------
        5. Weighted Adjacency Matrix — Undirected
+       Algorithm:
+       - Create an n x n matrix initialized with 0.
+       - For each weighted edge (u, v, w), store w in both directions.
+       Notes:
+       - If multiple edges appear, the latest weight overwrites the previous one.
+       - Use when constant-time edge lookup is important.
     ------------------------------------------------- */
     static void weightedMatrixUndirected() {
         Scanner sc = new Scanner(System.in);
@@ -137,6 +192,12 @@ public class L3_JavaGraphRepresentation {
 
     /* -------------------------------------------------
        6. Weighted Adjacency Matrix — Directed
+       Algorithm:
+       - Create an n x n matrix initialized with 0.
+       - For each weighted edge (u, v, w), store w only at adj[u][v].
+       Notes:
+       - Direction and weight are both preserved.
+       - Suitable for dense graphs or fast lookup scenarios.
     ------------------------------------------------- */
     static void weightedMatrixDirected() {
         Scanner sc = new Scanner(System.in);
@@ -157,6 +218,12 @@ public class L3_JavaGraphRepresentation {
 
     /* -------------------------------------------------
        7. Weighted Adjacency List — Undirected
+       Algorithm:
+       - Create a list of lists where each edge is stored as [neighbor, weight].
+       - For each edge (u, v, w), add it to both u and v.
+       Notes:
+       - More memory-efficient than matrix for sparse weighted graphs.
+       - Commonly used in shortest path and graph traversal problems.
     ------------------------------------------------- */
     static void weightedListUndirected() {
         Scanner sc = new Scanner(System.in);
@@ -179,6 +246,12 @@ public class L3_JavaGraphRepresentation {
 
     /* -------------------------------------------------
        8. Weighted Adjacency List — Directed
+       Algorithm:
+       - Create a list of lists where each edge is stored as [neighbor, weight].
+       - For each edge (u, v, w), add it only to u's list.
+       Notes:
+       - Preserves direction and weight.
+       - Ideal for sparse directed weighted graphs.
     ------------------------------------------------- */
     static void weightedListDirected() {
         Scanner sc = new Scanner(System.in);
@@ -197,8 +270,6 @@ public class L3_JavaGraphRepresentation {
 
         printWeightedList(adj);
     }
-
- 
 
     public static void main(String[] args) {
         System.out.println("Everything Fine");

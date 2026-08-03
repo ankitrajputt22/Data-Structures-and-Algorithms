@@ -1,18 +1,182 @@
-/*
- * @lc app=leetcode id=1608 lang=cpp
- *
- * [1608] Special Array With X Elements Greater Than or Equal X
- */
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
-// @lc code=start
-class Solution {
+using namespace std;
+
+/*
+=========================================================
+LeetCode 1608 : Special Array With X Elements ≥ X
+=========================================================
+
+Goal:
+Find integer x such that exactly x elements
+in array are >= x.
+
+If such x exists return it
+else return -1.
+
+Example:
+nums = [3,5]
+
+x = 2
+because 2 elements >= 2
+
+Output = 2
+
+=========================================================
+*/
+
+
+
+/*
+=========================================================
+Approach 1 : Brute Force
+=========================================================
+
+Try every possible x from 0 → n.
+
+For each x count elements ≥ x.
+
+If count == x → answer found.
+
+Time Complexity : O(n²)
+Space Complexity : O(1)
+*/
+
+class Solution1 {
 public:
+
     int specialArray(vector<int>& nums) {
-        
+
+        int n = nums.size();
+
+        for (int x = 0; x <= n; x++) {
+
+            int count = 0;
+
+            for (int i = 0; i < n; i++) {
+
+                if (nums[i] >= x)
+                    count++;
+            }
+
+            if (count == x)
+                return x;
+        }
+
+        return -1;
     }
 };
-// @lc code=end
 
+
+
+
+/*
+=========================================================
+Approach 2 : Sorting + lower_bound
+=========================================================
+
+Sort the array first.
+
+Use lower_bound(x) to find first element ≥ x.
+
+Number of elements ≥ x:
+
+n - index
+
+If that count == x → answer.
+
+Time Complexity : O(n log n)
+Space Complexity : O(1)
+*/
+
+class Solution2 {
+public:
+
+    int specialArray(vector<int>& nums) {
+
+        int n = nums.size();
+
+        sort(nums.begin(), nums.end());
+
+        for (int x = 0; x <= 100; x++) {
+
+            int lb = lower_bound(nums.begin(),
+                                 nums.end(),
+                                 x) - nums.begin();
+
+            int count = n - lb;
+
+            if (count == x)
+                return x;
+        }
+
+        return -1;
+    }
+};
+
+
+
+
+/*
+=========================================================
+Approach 3 : Sorting + Direct Check (Better)
+=========================================================
+
+Sort the array.
+
+For each position i:
+
+Elements ≥ nums[i] = n - i
+
+Check if that value satisfies condition.
+
+Time Complexity : O(n log n)
+Space Complexity : O(1)
+*/
+
+class Solution3 {
+public:
+
+    int specialArray(vector<int>& nums) {
+
+        int n = nums.size();
+
+        sort(nums.begin(), nums.end());
+
+        for (int i = 0; i < n; i++) {
+
+            int x = n - i;
+
+            if (nums[i] >= x && (i == 0 || nums[i - 1] < x))
+                return x;
+        }
+
+        return -1;
+    }
+};
+
+
+
+
+/*
+=========================================================
+Driver Code
+=========================================================
+*/
+
+int main() {
+
+    vector<int> nums = {3,5};
+
+    Solution3 obj;
+
+    cout << "Special Value: "
+         << obj.specialArray(nums) << endl;
+
+    return 0;
+}
 
 class Solution {
 public:
